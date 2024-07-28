@@ -4,14 +4,17 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import About from './pages/About';
 import SignIn from './pages/signIn';
-import SignUp from './pages/signUp'
+import SignUp from './pages/signUp';
+import Head from './Component/Head';
 function App() {
   return <>
    <BrowserRouter>
+   {/*header*/}
+   <Head/>
     <Routes>
     
       <Route path='/'element={<Home/>}/>
-      <Route path='/profile'element={<Profile/>}/>
+      <Route path='/Profile'element={<Profile/>}/>
       <Route path='/About'element={<About/>}/>
      <Route path='/Signin' element={<SignIn/>}/>
      <Route path='/Signup'  element={<SignUp/>}/>
