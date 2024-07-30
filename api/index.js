@@ -1,17 +1,27 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import userRoutes from './routes/user.route.js'
+import authRoutes from './routes/auth.route.js'
 //import dotenv from 'dotenv';
-//dotenv.config();
-mongoose.connect('mongodb://localhost:27017/Auth').then(()=>{
- console.log("connected to database")
-}).catch((err)=>{
-  console.log(err)
-})
 const app=express();
+const db='mongodb://127.0.0.1:27017/userdata'
+console.log(db)
+async function connectToDatabase() {
+  try {
+    await mongoose.connect('mongodb://127.0.0.1:27017/userdata', { useNewUrlParser: true, useUnifiedTopology: true } );
+    console.log("Connected to database");
+  } catch (err) {
+    console.error("Error connecting to database:", err);
+  }
+}
+
+// Call the function to connect to the database
+connectToDatabase();
+app.use(express.json());
 app.listen(400,()=>{
  console.log('listening on port 400')
 })
 app.use("/api/user",userRoutes);
+app.use("/api/auth",authRoutes)
 
 
