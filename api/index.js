@@ -19,7 +19,7 @@ async function connectToDatabase() {
 connectToDatabase();
 app.use(express.json());
 app.listen(400,()=>{
- console.log('listening on port 400')
+ console.log('listening on port 4000')
 })
 app.use("/api/user",userRoutes);
 app.use("/api/auth",authRoutes);
