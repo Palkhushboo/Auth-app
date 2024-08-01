@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 
 function SignUp() {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
-
+  const navigate=useNavigate()
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -30,7 +30,7 @@ function SignUp() {
         throw new Error(data.message || 'Something went wrong');
       }
 
-      setMessage(data.message);
+     navigate('/')
     } catch (error) {
       setError(error.message);
     }

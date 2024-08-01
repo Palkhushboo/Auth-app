@@ -44,10 +44,12 @@ export const signin = async (req, res, next) => {
     if (!validPassword) return next(errorHandler(401, 'Wrong credentials'));
 
     const token = jwt.sign({ id: validUser._id }, JWT_SECRET, { expiresIn: '1h' });
-    const {password: hashedPassword, ...rest}=validUser._doc;
-    const expiryDate=new Date(Date.now()+36000000);//1hour
-    res.cookie('access_token',token,{httpOnly:true}).status(200).json(rest)
-   
+    const { password: hashedPassword, ...rest } = validUser._doc;
+    const expiryDate = new Date(Date.now() + 3600000); // 1 hour
+
+    res.cookie('access_token', token, { httpOnly: true, expires: expiryDate })
+      .status(200)
+      .json({ message: 'Signed in successfully', user: rest });
   } catch (error) {
     next(error);
   }
